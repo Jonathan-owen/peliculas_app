@@ -23,3 +23,38 @@
 </p>
 
 <% end %>
+
+<h3>Agregar comentario:</h3>
+
+<%= form_with(model: [@movie, Review.new], local: true) do |form| %>
+  <div>
+    <%= form.label :rating, "Calificación (1-5)" %><br>
+    <%= form.number_field :rating, in: 1..5 %>
+  </div>
+
+  <div>
+    <%= form.label :comment %><br>
+    <%= form.text_area :comment %>
+  </div>
+
+  <%= form.submit "Enviar" %>
+<% end %>
+
+<h3>Comentarios:</h3>
+
+<% if @movie.reviews.any? %>
+  <ul>
+    <% @movie.reviews.each do |review| %>
+      <li>
+        <strong><%= review.rating %>/5:</strong> <%= review.comment %>
+      </li>
+    <% end %>
+  </ul>
+
+  <p><strong>Promedio:</strong>
+    <%= @movie.reviews.average(:rating).round(1) %> / 5
+  </p>
+<% else %>
+  <p>No hay comentarios aún.</p>
+<% end %>
+
