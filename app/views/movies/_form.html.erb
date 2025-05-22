@@ -29,4 +29,10 @@
   <div>
     <%= form.submit %>
   </div>
+
+  <div>
+  <%= form.label :categories %><br>
+  <%= form.collection_select :category_ids, Category.all, :id, :name, {}, { multiple: true } %>
+</div>
+
 <% end %>

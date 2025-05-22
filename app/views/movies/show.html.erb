@@ -17,4 +17,9 @@
 
   <% if @movie.image.attached? %>
   <%= image_tag @movie.image, width: 300 %>
+
+  <p><strong>Categorías:</strong>
+  <%= @movie.categories.map(&:name).join(", ") %>
+</p>
+
 <% end %>
